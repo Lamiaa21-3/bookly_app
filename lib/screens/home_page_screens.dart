@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+import '../components/components.dart';
+
 class HomePageScreen extends StatelessWidget {
   const HomePageScreen({Key? key}) : super(key: key);
 
@@ -77,35 +79,7 @@ class HomePageScreen extends StatelessWidget {
           Expanded(
             child: ListView.separated(itemBuilder: (context, index) =>
 
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Container(
-                          width: 120,
-                          height: 100,
-                          color: Colors.teal,
-                        ),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-
-                        children: [
-
-
-                          Text('lamiaa gamal abdelhmid', style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),maxLines: 3,overflow: TextOverflow.ellipsis,),
-
-                          SizedBox(height: 15,
-                          width: 20,),
-
-                          Text('J.K Rolling'),
-                        ],
-
-
-              ),
-                    ],
-                  ),
+                      listViewIetm(),
 
                  separatorBuilder: (context, index) =>
                     Container(
