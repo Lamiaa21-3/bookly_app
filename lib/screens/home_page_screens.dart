@@ -87,7 +87,7 @@ class HomePageScreen extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.only(left: 20, bottom: 20),
-            child: Text('Best Seller'),
+            child: Text('Best Seller',style: TextStyle(fontSize: 20),),
           ),
           Expanded(
             child: ListView.separated(
