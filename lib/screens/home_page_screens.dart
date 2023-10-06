@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:new_task/screens/selected_book_screen.dart';
 
 import '../components/components.dart';
 
@@ -28,7 +29,7 @@ class HomePageScreen extends StatelessWidget {
         ],
       ),
       body: Column(
-       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
@@ -42,27 +43,37 @@ class HomePageScreen extends StatelessWidget {
                     width: 120,
                     color: Colors.orange,
                   ),
-                  SizedBox(width: 20,),
+                  SizedBox(
+                    width: 20,
+                  ),
                   Container(
                     width: 160,
                     color: Colors.orange,
                   ),
-                  SizedBox(width: 20,),
+                  SizedBox(
+                    width: 20,
+                  ),
                   Container(
                     width: 160,
                     color: Colors.orange,
                   ),
-                  SizedBox(width: 20,),
+                  SizedBox(
+                    width: 20,
+                  ),
                   Container(
                     width: 120,
                     color: Colors.orange,
                   ),
-                  SizedBox(width: 20,),
+                  SizedBox(
+                    width: 20,
+                  ),
                   Container(
                     width: 160,
                     color: Colors.orange,
                   ),
-                  SizedBox(width: 20,),
+                  SizedBox(
+                    width: 20,
+                  ),
                   Container(
                     width: 160,
                     color: Colors.orange,
@@ -71,23 +82,30 @@ class HomePageScreen extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 25,),
+          SizedBox(
+            height: 25,
+          ),
           Padding(
-            padding: const EdgeInsets.only(left: 20,bottom: 20),
+            padding: const EdgeInsets.only(left: 20, bottom: 20),
             child: Text('Best Seller'),
           ),
           Expanded(
-            child: ListView.separated(itemBuilder: (context, index) =>
-
-                      listViewIetm(),
-
-                 separatorBuilder: (context, index) =>
-                    Container(
+            child: ListView.separated(
+                itemBuilder: (context, index) =>
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) =>  SelectedBookScreen()),
+                        );
+                      },
+                        child: listViewIetm(),
+                    ),
+                separatorBuilder: (context, index) => Container(
                       color: Colors.white,
                       width: double.infinity,
                       height: 1,
                     ),
-
                 itemCount: 10),
           )
         ],
