@@ -1,13 +1,30 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:new_task/models/book_model.dart';
 import 'package:new_task/screens/selected_book_screen.dart';
+import 'package:new_task/services/get_book_sevices.dart';
 
 import '../components/components.dart';
 
-class HomePageScreen extends StatelessWidget {
+class HomePageScreen extends StatefulWidget {
   const HomePageScreen({Key? key}) : super(key: key);
 
+  @override
+  State<HomePageScreen> createState() => _HomePageScreenState();
+}
+
+class _HomePageScreenState extends State<HomePageScreen> {
+  @override
+  void initState() {
+ store();
+    super.initState();
+  }
+  void store () async
+  { String ?bookName;
+    GetBookServices services =  GetBookServices();
+    BookModel  bookModel =await services.getBookServices();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -111,7 +128,7 @@ class HomePageScreen extends StatelessWidget {
                       ),
                   itemCount: 10),
             )
-            
+
           ],
 
         ),
