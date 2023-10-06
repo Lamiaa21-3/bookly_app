@@ -11,105 +11,110 @@ class HomePageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        // backgroundColor: Colors.black,
-        elevation: 0,
-        title: Text(
-          'BOOKLY',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Icon(
-              Icons.search,
-              size: 33,
-            ),
+        appBar: AppBar(
+          // backgroundColor: Colors.black,
+          elevation: 0,
+          title: Text(
+            'BOOKLY',
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
-        ],
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 20),
-            child: Container(
-              height: 100,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: <Widget>[
-                  Container(
-                    width: 120,
-                    color: Colors.orange,
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Container(
-                    width: 160,
-                    color: Colors.orange,
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Container(
-                    width: 160,
-                    color: Colors.orange,
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Container(
-                    width: 120,
-                    color: Colors.orange,
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Container(
-                    width: 160,
-                    color: Colors.orange,
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Container(
-                    width: 160,
-                    color: Colors.orange,
-                  ),
-                ],
+          actions: [
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Icon(
+                Icons.search,
+                size: 33,
               ),
             ),
-          ),
-          SizedBox(
-            height: 25,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 20, bottom: 20),
-            child: Text('Best Seller',style: TextStyle(fontSize: 20),),
-          ),
-          Expanded(
-            child: ListView.separated(
-                itemBuilder: (context, index) =>
-                    GestureDetector(
-                      onTap: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) =>  SelectedBookScreen()),
-                        );
-                      },
+          ],
+        ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: Container(
+                height: 100,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: <Widget>[
+                    Container(
+                      width: 120,
+                      color: Colors.orange,
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Container(
+                      width: 160,
+                      color: Colors.orange,
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Container(
+                      width: 160,
+                      color: Colors.orange,
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Container(
+                      width: 120,
+                      color: Colors.orange,
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Container(
+                      width: 160,
+                      color: Colors.orange,
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Container(
+                      width: 160,
+                      color: Colors.orange,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 25,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20, bottom: 20),
+              child: Text(
+                'Best Seller',
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+            Expanded(
+              child: ListView.separated(
+                  itemBuilder: (context, index) => GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SelectedBookScreen()),
+                          );
+                        },
                         child: listViewIetm(),
-                    ),
-                separatorBuilder: (context, index) => Container(
-                      color: Colors.white,
-                      width: double.infinity,
-                      height: 1,
-                    ),
-                itemCount: 10),
-          )
-        ],
-      ),
+                      ),
+                  separatorBuilder: (context, index) => Container(
+                        color: Colors.white,
+                        width: double.infinity,
+                        height: 1,
+                      ),
+                  itemCount: 10),
+            )
+            
+          ],
+
+        ),
     );
   }
 }
