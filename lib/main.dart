@@ -8,7 +8,7 @@ import 'cubits/get_book_state.dart';
 void main() {
   runApp(BlocProvider(
     create: (context){
-      return BookCubit(StateInitialData())..getBookData();
+      return BookCubit()..getBookData();
 
     },
       child: const MyApp()));
@@ -22,12 +22,21 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: HomePageScreen(),
-      theme : ThemeData(
-        brightness: Brightness.dark
-      ),
+    return BlocConsumer<BookCubit,BookState>(
+      listener: (context,state){},
+      builder: (context,state){
+
+
+        return  MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: HomePageScreen(),
+          theme : ThemeData(
+              brightness: Brightness.dark
+          ),
+        );
+      },
+
+
     );
   }
 }
