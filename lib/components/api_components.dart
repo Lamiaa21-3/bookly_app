@@ -3,17 +3,11 @@
 import 'package:http/http.dart' as http;
 
 class Api {
-  Future<http.Response> get ({required String url}) async
+   Future<dynamic> get ({required String url,required Map<String ,dynamic> query}) async
   {
-   http.Response response= await http.get(Uri.parse(url));
-   if(response.statusCode == 200)
-     {
-       return response;
-     }
-   else {
-     throw Exception(
-       'the problem is with statusCode ${response.statusCode}'
-     );
+    var uri = Uri.parse(url);
+    var uriWithQuery = uri.replace( queryParameters: query);
+    return http.get(uriWithQuery);
+
    }
   }
-}
