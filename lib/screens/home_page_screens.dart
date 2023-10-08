@@ -16,7 +16,7 @@ import '../cubits/get_book_state.dart';
 class HomePageScreen extends StatelessWidget {
   HomePageScreen({Key? key}) : super(key: key);
 
-  //Book ?bookData;
+  Book ?bookData;
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +62,7 @@ class HomePageScreen extends StatelessWidget {
                     itemCount:2,
                     // itemCount: BlocProvider.of<BookCubit>(context)?.bookList.length,
                     itemBuilder: (BuildContext context, int index) {
-                      //Image.network('{bookData?.items?[index].volumeInfo?.imageLinks?.smallThumbnail}');
+                      Image.network('${bookData?.items?[index].volumeInfo?.imageLinks?.smallThumbnail}');
 
                     },
                     // children: <Widget>[

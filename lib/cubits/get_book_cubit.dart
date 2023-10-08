@@ -19,7 +19,7 @@ class BookCubit extends Cubit<BookState> {
         query: {'q': 'programming'}).then((value) {
           final responsbody=json.decode(value.body);
 
-    bookModel=Book.fromJson(value.data);
+    bookModel=Book.fromJson(responsbody);
     print(bookModel?.kind);
 
       emit(StateSuccessData());

@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../cubits/get_book_cubit.dart';
 import '../models/book_model.dart';
 
 class SelectedBookScreen extends StatelessWidget {
-   SelectedBookScreen({Key? key, required this.bookModel, required this.index}) : super(key: key);
+  SelectedBookScreen({Key? key, required this.bookModel, required this.index})
+      : super(key: key);
   final Book? bookModel;
 
   final int index;
@@ -35,21 +38,20 @@ class SelectedBookScreen extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.only( top: 25),
+        padding: const EdgeInsets.only(top: 25),
         child: Column(
           //mainAxisSize: MainAxisSize.min,
           //mainAxisAlignment: MainAxisAlignment.start,
-           crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
-
-             // Image.network('${bookModel?.items?[index].volumeInfo?.imageLinks?.smallThumbnail}'),
-                        SizedBox(
+            Image.network(
+                '${bookModel?.items?[index].volumeInfo?.imageLinks?.smallThumbnail}'),
+            SizedBox(
               height: 35,
             ),
             Center(
               child: Text(
-                '{bookModel?.items?[index].volumeInfo?.title}',
+                '${bookModel?.items?[index].volumeInfo?.title}',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32),
               ),
             ),
@@ -58,7 +60,7 @@ class SelectedBookScreen extends StatelessWidget {
             ),
             Center(
               child: Text(
-                '{bookModel?.items?[index].volumeInfo?.publisher}',
+                '${bookModel?.items?[index].volumeInfo?.publisher}',
                 style: TextStyle(fontSize: 25),
               ),
             ),
@@ -76,19 +78,21 @@ class SelectedBookScreen extends StatelessWidget {
                   width: 10,
                 ),
                 Text(
-                  '{bookModel?.items?[index].volumeInfo?.averageRating}',
+                  '${bookModel?.items?[index].volumeInfo?.averageRating}',
                   style: TextStyle(fontSize: 20),
                 ),
                 SizedBox(
                   width: 10,
                 ),
                 Text(
-                  '({bookModel?.items?[index].volumeInfo?.pageCount})',
+                  '(${bookModel?.items?[index].volumeInfo?.pageCount})',
                   style: TextStyle(fontSize: 20),
                 ),
               ],
             ),
-            SizedBox(height: 45,),
+            SizedBox(
+              height: 45,
+            ),
             Row(
               //crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -102,76 +106,53 @@ class SelectedBookScreen extends StatelessWidget {
                   ),
                   height: 50,
                   width: 150,
-                  child: Center(child: Text('{bookModel?.items?[index].volumeInfo?.averageRating}',
-                    style: TextStyle(color: Colors.black, fontSize: 24),)),
+                  child: Center(
+                      child: Text(
+                    '${bookModel?.items?[index].volumeInfo?.averageRating}',
+                    style: TextStyle(color: Colors.black, fontSize: 24),
+                  )),
                 ),
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.pinkAccent,
                     borderRadius: BorderRadius.only(
                         topRight: Radius.circular(18),
-                        bottomRight: Radius.circular(18)
+                        bottomRight: Radius.circular(18)),
+                  ),
+                  child: Center(
+                    child: Text(
+                      'free previou',
+                      style: TextStyle(fontSize: 24),
                     ),
-                  ),
-                  child: Center(child: Text(
-                    'free previou', style: TextStyle(fontSize: 24),
-                  ),
                   ),
                   height: 50,
                   width: 150,
-
                 ),
               ],
             ),
-            SizedBox(height: 20,),
-            Text('You can also like',style: TextStyle(fontSize: 20),),
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              'You can also like',
+              style: TextStyle(fontSize: 20),
+            ),
             Padding(
               padding: const EdgeInsets.only(top: 20),
               child: Container(
                 height: 100,
-                child: ListView(
+                child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  children: <Widget>[
-                    Container(
-                      width: 120,
-                      color: Colors.orange,
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Container(
-                      width: 160,
-                      color: Colors.orange,
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Container(
-                      width: 160,
-                      color: Colors.orange,
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Container(
-                      width: 120,
-                      color: Colors.orange,
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Container(
-                      width: 160,
-                      color: Colors.orange,
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Container(
-                      width: 160,
-                      color: Colors.orange,
-                    ),
-                  ],
+                  //itemCount: 2,
+                   itemCount: BlocProvider.of<BookCubit>(context)?.bookModel?.items?.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    Image.network(
+                        '${bookModel?.items?[index].volumeInfo?.imageLinks?.smallThumbnail}');
+                  },
+                  // children: <Widget>[
+                  //   // Image.asset(
+                  //   //     '${bookData.items[in]}')
+                  // ],
                 ),
               ),
             ),
