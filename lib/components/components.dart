@@ -6,7 +6,7 @@ import 'package:new_task/models/book_model.dart';
 class ComponentIetm extends StatelessWidget {
   ComponentIetm({Key? key, required this.bookModel, required this.index})
       : super(key: key);
-  final Book? bookModel;
+  final BookModel? bookModel;
 
   final int index;
 

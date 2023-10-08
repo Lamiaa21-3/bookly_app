@@ -9,7 +9,7 @@ import '../models/book_model.dart';
 class SelectedBookScreen extends StatelessWidget {
   SelectedBookScreen({Key? key, required this.bookModel, required this.index})
       : super(key: key);
-  final Book? bookModel;
+  final BookModel? bookModel;
 
   final int index;
 
@@ -45,7 +45,7 @@ class SelectedBookScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image.network(
-                '${bookModel?.items?[index].volumeInfo?.imageLinks?.smallThumbnail}'),
+                '${bookModel?.items?[index].volumeInfo?.imageLinks?.smallThumbnail}',width: 100,height: 50,),
             SizedBox(
               height: 35,
             ),
