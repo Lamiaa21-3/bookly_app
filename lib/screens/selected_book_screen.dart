@@ -2,8 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../models/book_model.dart';
+
 class SelectedBookScreen extends StatelessWidget {
-  const SelectedBookScreen({Key? key}) : super(key: key);
+   SelectedBookScreen({Key? key, required this.bookModel, required this.index}) : super(key: key);
+  final Book? bookModel;
+
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -37,19 +42,14 @@ class SelectedBookScreen extends StatelessWidget {
            crossAxisAlignment: CrossAxisAlignment.start,
           children: [
 
-            Center(
-              child: Container(
-                color: Colors.teal,
-                width: 100,
-                height: 120,
-              ),
-            ),
-            SizedBox(
+
+             // Image.network('${bookModel?.items?[index].volumeInfo?.imageLinks?.smallThumbnail}'),
+                        SizedBox(
               height: 35,
             ),
             Center(
               child: Text(
-                'The jungle Book',
+                '{bookModel?.items?[index].volumeInfo?.title}',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32),
               ),
             ),
@@ -58,7 +58,7 @@ class SelectedBookScreen extends StatelessWidget {
             ),
             Center(
               child: Text(
-                'Ruby Killping',
+                '{bookModel?.items?[index].volumeInfo?.publisher}',
                 style: TextStyle(fontSize: 25),
               ),
             ),
@@ -76,14 +76,14 @@ class SelectedBookScreen extends StatelessWidget {
                   width: 10,
                 ),
                 Text(
-                  '4.8',
+                  '{bookModel?.items?[index].volumeInfo?.averageRating}',
                   style: TextStyle(fontSize: 20),
                 ),
                 SizedBox(
                   width: 10,
                 ),
                 Text(
-                  '(2390)',
+                  '({bookModel?.items?[index].volumeInfo?.pageCount})',
                   style: TextStyle(fontSize: 20),
                 ),
               ],
@@ -102,7 +102,7 @@ class SelectedBookScreen extends StatelessWidget {
                   ),
                   height: 50,
                   width: 150,
-                  child: Center(child: Text('19.99',
+                  child: Center(child: Text('{bookModel?.items?[index].volumeInfo?.averageRating}',
                     style: TextStyle(color: Colors.black, fontSize: 24),)),
                 ),
                 Container(

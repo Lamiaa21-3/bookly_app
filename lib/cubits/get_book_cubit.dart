@@ -5,28 +5,27 @@ import 'package:new_task/cubits/get_book_state.dart';
 
 import '../components/api_components.dart';
 import '../models/book_model.dart';
-
+import 'package:http/http.dart' as http;
 class BookCubit extends Cubit<BookState> {
   BookCubit():super(StateInitialData());
   static BookCubit get(context)=>BlocProvider.of(context);
-  BookModel? bookModel;
-  List<BookModel> bookList = [];
+  Book? bookModel;
+
   void getBookData() async
   {
-    bookModel=await  Api().get(
+    emit(StateLoadingData());
+    await  Api().get(
         url: 'https://www.googleapis.com/books/v1/volumes',
         query: {'q': 'programming'}).then((value) {
-      List<dynamic> data = jsonDecode(value.body);
+          final responsbody=json.decode(value.body);
 
-      for(int i = 0 ; i <data.length ; i++)
-      {
-        bookList.add(BookModel.fromJson(data[i]));
-      }
-      print(value.body);
+    bookModel=Book.fromJson(value.data);
+    print(bookModel?.kind);
+
       emit(StateSuccessData());
     }).catchError((error){
-      print(error);
-      emit(StateLoadingData());
+      print('error.toString()$error');
+      emit(StateErrorgData());
     });
   }
 

@@ -1,11 +1,11 @@
-class BookModel {
+class Book {
   String? kind;
   int? totalItems;
   List<Items>? items;
 
-  BookModel({this.kind, this.totalItems, this.items});
+  Book({this.kind, this.totalItems, this.items});
 
-  BookModel.fromJson(Map<String, dynamic> json) {
+  Book.fromJson(Map<String, dynamic> json) {
     kind = json['kind'];
     totalItems = json['totalItems'];
     if (json['items'] != null) {
