@@ -1,372 +1,416 @@
-import 'package:json_annotation/json_annotation.dart';
-
-part 'book_model.g.dart';
-
-@JsonSerializable()
 class BookModel {
-  @JsonKey(name: "kind")
-  final String? kind;
-  @JsonKey(name: "totalItems")
-  final int? totalItems;
-  @JsonKey(name: "items")
-  final List<Item>? items;
+  String? kind;
+  int? totalItems;
+  List<Items>? items;
 
-  BookModel({
-    required this.kind,
-    required this.totalItems,
-    required this.items,
-  });
+  BookModel({this.kind, this.totalItems, this.items});
 
-  factory BookModel.fromJson(Map<String, dynamic> json) =>
-      _$BookModelFromJson(json);
+  BookModel.fromJson(Map<String, dynamic> json) {
+    kind = json['kind'];
+    totalItems = json['totalItems'];
+    if (json['items'] != null) {
+      items = <Items>[];
+      json['items'].forEach((v) {
+        items!.add(new Items.fromJson(v));
+      });
+    }
+  }
 
-  Map<String, dynamic> toJson() => _$BookModelToJson(this);
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['kind'] = this.kind;
+    data['totalItems'] = this.totalItems;
+    if (this.items != null) {
+      data['items'] = this.items!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
 }
 
-@JsonSerializable()
-class Item {
-  @JsonKey(name: "kind")
-  final String? kind;
-  @JsonKey(name: "id")
-  final String? id;
-  @JsonKey(name: "etag")
-  final String? etag;
-  @JsonKey(name: "selfLink")
-  final String? selfLink;
-  @JsonKey(name: "volumeInfo")
-  final VolumeInfo? volumeInfo;
-  @JsonKey(name: "saleInfo")
-  final SaleInfo? saleInfo;
-  @JsonKey(name: "accessInfo")
-  final AccessInfo? accessInfo;
-  @JsonKey(name: "searchInfo")
-  final SearchInfo? searchInfo;
+class Items {
+  String? kind;
+  String? id;
+  String? etag;
+  String? selfLink;
+  VolumeInfo? volumeInfo;
+  SaleInfo? saleInfo;
+  AccessInfo? accessInfo;
+  SearchInfo? searchInfo;
 
-  Item({
-    required this.kind,
-    required this.id,
-    required this.etag,
-    required this.selfLink,
-    required this.volumeInfo,
-    required this.saleInfo,
-    required this.accessInfo,
-    required this.searchInfo,
-  });
+  Items(
+      {this.kind,
+        this.id,
+        this.etag,
+        this.selfLink,
+        this.volumeInfo,
+        this.saleInfo,
+        this.accessInfo,
+        this.searchInfo});
 
-  factory Item.fromJson(Map<String, dynamic> json) => _$ItemFromJson(json);
+  Items.fromJson(Map<String, dynamic> json) {
+    kind = json['kind'];
+    id = json['id'];
+    etag = json['etag'];
+    selfLink = json['selfLink'];
+    volumeInfo = json['volumeInfo'] != null
+        ? new VolumeInfo.fromJson(json['volumeInfo'])
+        : null;
+    saleInfo = json['saleInfo'] != null
+        ? new SaleInfo.fromJson(json['saleInfo'])
+        : null;
+    accessInfo = json['accessInfo'] != null
+        ? new AccessInfo.fromJson(json['accessInfo'])
+        : null;
+    searchInfo = json['searchInfo'] != null
+        ? new SearchInfo.fromJson(json['searchInfo'])
+        : null;
+  }
 
-  Map<String, dynamic> toJson() => _$ItemToJson(this);
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['kind'] = this.kind;
+    data['id'] = this.id;
+    data['etag'] = this.etag;
+    data['selfLink'] = this.selfLink;
+    if (this.volumeInfo != null) {
+      data['volumeInfo'] = this.volumeInfo!.toJson();
+    }
+    if (this.saleInfo != null) {
+      data['saleInfo'] = this.saleInfo!.toJson();
+    }
+    if (this.accessInfo != null) {
+      data['accessInfo'] = this.accessInfo!.toJson();
+    }
+    if (this.searchInfo != null) {
+      data['searchInfo'] = this.searchInfo!.toJson();
+    }
+    return data;
+  }
 }
 
-@JsonSerializable()
-class AccessInfo {
-  @JsonKey(name: "country")
-  final String? country;
-  @JsonKey(name: "viewability")
-  final String? viewability;
-  @JsonKey(name: "embeddable")
-  final bool? embeddable;
-  @JsonKey(name: "publicDomain")
-  final bool? publicDomain;
-  @JsonKey(name: "textToSpeechPermission")
-  final String? textToSpeechPermission;
-  @JsonKey(name: "epub")
-  final Epub? epub;
-  @JsonKey(name: "pdf")
-  final Epub? pdf;
-  @JsonKey(name: "webReaderLink")
-  final String? webReaderLink;
-  @JsonKey(name: "accessViewStatus")
-  final String? accessViewStatus;
-  @JsonKey(name: "quoteSharingAllowed")
-  final bool? quoteSharingAllowed;
-
-  AccessInfo({
-    required this.country,
-    required this.viewability,
-    required this.embeddable,
-    required this.publicDomain,
-    required this.textToSpeechPermission,
-    required this.epub,
-    required this.pdf,
-    required this.webReaderLink,
-    required this.accessViewStatus,
-    required this.quoteSharingAllowed,
-  });
-
-  factory AccessInfo.fromJson(Map<String, dynamic> json) =>
-      _$AccessInfoFromJson(json);
-
-  Map<String, dynamic> toJson() => _$AccessInfoToJson(this);
-}
-
-@JsonSerializable()
-class Epub {
-  @JsonKey(name: "isAvailable")
-  final bool? isAvailable;
-  @JsonKey(name: "acsTokenLink")
-  final String? acsTokenLink;
-
-  Epub({
-    required this.isAvailable,
-    required this.acsTokenLink,
-  });
-
-  factory Epub.fromJson(Map<String, dynamic> json) => _$EpubFromJson(json);
-
-  Map<String, dynamic> toJson() => _$EpubToJson(this);
-}
-
-@JsonSerializable()
-class SaleInfo {
-  @JsonKey(name: "country")
-  final String? country;
-  @JsonKey(name: "saleability")
-  final String? saleability;
-  @JsonKey(name: "isEbook")
-  final bool? isEbook;
-  @JsonKey(name: "listPrice")
-  final SaleInfoListPrice? listPrice;
-  @JsonKey(name: "retailPrice")
-  final SaleInfoListPrice? retailPrice;
-  @JsonKey(name: "buyLink")
-  final String? buyLink;
-  @JsonKey(name: "offers")
-  final List<Offer>? offers;
-
-  SaleInfo({
-    required this.country,
-    required this.saleability,
-    required this.isEbook,
-    required this.listPrice,
-    required this.retailPrice,
-    required this.buyLink,
-    required this.offers,
-  });
-
-  factory SaleInfo.fromJson(Map<String, dynamic> json) =>
-      _$SaleInfoFromJson(json);
-
-  Map<String, dynamic> toJson() => _$SaleInfoToJson(this);
-}
-
-@JsonSerializable()
-class SaleInfoListPrice {
-  @JsonKey(name: "amount")
-  final double? amount;
-  @JsonKey(name: "currencyCode")
-  final String? currencyCode;
-
-  SaleInfoListPrice({
-    required this.amount,
-    required this.currencyCode,
-  });
-
-  factory SaleInfoListPrice.fromJson(Map<String, dynamic> json) =>
-      _$SaleInfoListPriceFromJson(json);
-
-  Map<String, dynamic> toJson() => _$SaleInfoListPriceToJson(this);
-}
-
-@JsonSerializable()
-class Offer {
-  @JsonKey(name: "finskyOfferType")
-  final int? finskyOfferType;
-  @JsonKey(name: "listPrice")
-  final OfferListPrice? listPrice;
-  @JsonKey(name: "retailPrice")
-  final OfferListPrice? retailPrice;
-
-  Offer({
-    required this.finskyOfferType,
-    required this.listPrice,
-    required this.retailPrice,
-  });
-
-  factory Offer.fromJson(Map<String, dynamic> json) => _$OfferFromJson(json);
-
-  Map<String, dynamic> toJson() => _$OfferToJson(this);
-}
-
-@JsonSerializable()
-class OfferListPrice {
-  @JsonKey(name: "amountInMicros")
-  final int? amountInMicros;
-  @JsonKey(name: "currencyCode")
-  final String? currencyCode;
-
-  OfferListPrice({
-    required this.amountInMicros,
-    required this.currencyCode,
-  });
-
-  factory OfferListPrice.fromJson(Map<String, dynamic> json) =>
-      _$OfferListPriceFromJson(json);
-
-  Map<String, dynamic> toJson() => _$OfferListPriceToJson(this);
-}
-
-@JsonSerializable()
-class SearchInfo {
-  @JsonKey(name: "textSnippet")
-  final String? textSnippet;
-
-  SearchInfo({
-    required this.textSnippet,
-  });
-
-  factory SearchInfo.fromJson(Map<String, dynamic> json) =>
-      _$SearchInfoFromJson(json);
-
-  Map<String, dynamic> toJson() => _$SearchInfoToJson(this);
-}
-
-@JsonSerializable()
 class VolumeInfo {
-  @JsonKey(name: "title")
-  final String? title;
-  @JsonKey(name: "subtitle")
-  final String? subtitle;
-  @JsonKey(name: "authors")
-  final List<String>? authors;
-  @JsonKey(name: "publisher")
-  final String? publisher;
-  @JsonKey(name: "publishedDate")
-  final String? publishedDate;
-  @JsonKey(name: "description")
-  final String? description;
-  @JsonKey(name: "industryIdentifiers")
-  final List<IndustryIdentifier>? industryIdentifiers;
-  @JsonKey(name: "readingModes")
-  final ReadingModes? readingModes;
-  @JsonKey(name: "pageCount")
-  final int? pageCount;
-  @JsonKey(name: "printType")
-  final String? printType;
-  @JsonKey(name: "categories")
-  final List<String>? categories;
-  @JsonKey(name: "averageRating")
-  final double? averageRating;
-  @JsonKey(name: "ratingsCount")
-  final int? ratingsCount;
-  @JsonKey(name: "maturityRating")
-  final String? maturityRating;
-  @JsonKey(name: "allowAnonLogging")
-  final bool? allowAnonLogging;
-  @JsonKey(name: "contentVersion")
-  final String? contentVersion;
-  @JsonKey(name: "panelizationSummary")
-  final PanelizationSummary? panelizationSummary;
-  @JsonKey(name: "imageLinks")
-  final ImageLinks? imageLinks;
-  @JsonKey(name: "language")
-  final String? language;
-  @JsonKey(name: "previewLink")
-  final String? previewLink;
-  @JsonKey(name: "infoLink")
-  final String? infoLink;
-  @JsonKey(name: "canonicalVolumeLink")
-  final String? canonicalVolumeLink;
+  String? title;
+  List<String>? authors;
+  String? publisher;
+  String? publishedDate;
+  String? description;
+  List<IndustryIdentifiers>? industryIdentifiers;
+  ReadingModes? readingModes;
+  int? pageCount;
+  String? printType;
+  List<String>? categories;
+  int? averageRating;
+  int? ratingsCount;
+  String? maturityRating;
+  bool? allowAnonLogging;
+  String? contentVersion;
+  PanelizationSummary? panelizationSummary;
+  ImageLinks? imageLinks;
+  String? language;
+  String? previewLink;
+  String? infoLink;
+  String? canonicalVolumeLink;
+  String? subtitle;
 
-  VolumeInfo({
-    required this.title,
-    required this.subtitle,
-    required this.authors,
-    required this.publisher,
-    required this.publishedDate,
-    required this.description,
-    required this.industryIdentifiers,
-    required this.readingModes,
-    required this.pageCount,
-    required this.printType,
-    required this.categories,
-    required this.averageRating,
-    required this.ratingsCount,
-    required this.maturityRating,
-    required this.allowAnonLogging,
-    required this.contentVersion,
-    required this.panelizationSummary,
-    required this.imageLinks,
-    required this.language,
-    required this.previewLink,
-    required this.infoLink,
-    required this.canonicalVolumeLink,
-  });
+  VolumeInfo(
+      {this.title,
+        this.authors,
+        this.publisher,
+        this.publishedDate,
+        this.description,
+        this.industryIdentifiers,
+        this.readingModes,
+        this.pageCount,
+        this.printType,
+        this.categories,
+        this.averageRating,
+        this.ratingsCount,
+        this.maturityRating,
+        this.allowAnonLogging,
+        this.contentVersion,
+        this.panelizationSummary,
+        this.imageLinks,
+        this.language,
+        this.previewLink,
+        this.infoLink,
+        this.canonicalVolumeLink,
+        this.subtitle});
 
-  factory VolumeInfo.fromJson(Map<String, dynamic> json) =>
-      _$VolumeInfoFromJson(json);
+  VolumeInfo.fromJson(Map<String, dynamic> json) {
+    title = json['title'];
+    authors = json['authors']?.cast<String>();
+    publisher = json['publisher'];
+    publishedDate = json['publishedDate'];
+    description = json['description'];
+    if (json['industryIdentifiers'] != null) {
+      industryIdentifiers = <IndustryIdentifiers>[];
+      json['industryIdentifiers'].forEach((v) {
+        industryIdentifiers!.add(new IndustryIdentifiers.fromJson(v));
+      });
+    }
+    readingModes = json['readingModes'] != null
+        ? new ReadingModes.fromJson(json['readingModes'])
+        : null;
+    pageCount = json['pageCount'];
+    printType = json['printType'];
+    categories = json['categories']?.cast<String>();
+    averageRating = json['averageRating'];
+    ratingsCount = json['ratingsCount'];
+    maturityRating = json['maturityRating'];
+    allowAnonLogging = json['allowAnonLogging'];
+    contentVersion = json['contentVersion'];
+    panelizationSummary = json['panelizationSummary'] != null
+        ? new PanelizationSummary.fromJson(json['panelizationSummary'])
+        : null;
+    imageLinks = json['imageLinks'] != null
+        ? new ImageLinks.fromJson(json['imageLinks'])
+        : null;
+    language = json['language'];
+    previewLink = json['previewLink'];
+    infoLink = json['infoLink'];
+    canonicalVolumeLink = json['canonicalVolumeLink'];
+    subtitle = json['subtitle'];
+  }
 
-  Map<String, dynamic> toJson() => _$VolumeInfoToJson(this);
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['title'] = this.title;
+    data['authors'] = this.authors;
+    data['publisher'] = this.publisher;
+    data['publishedDate'] = this.publishedDate;
+    data['description'] = this.description;
+    if (this.industryIdentifiers != null) {
+      data['industryIdentifiers'] =
+          this.industryIdentifiers!.map((v) => v.toJson()).toList();
+    }
+    if (this.readingModes != null) {
+      data['readingModes'] = this.readingModes!.toJson();
+    }
+    data['pageCount'] = this.pageCount;
+    data['printType'] = this.printType;
+    data['categories'] = this.categories;
+    data['averageRating'] = this.averageRating;
+    data['ratingsCount'] = this.ratingsCount;
+    data['maturityRating'] = this.maturityRating;
+    data['allowAnonLogging'] = this.allowAnonLogging;
+    data['contentVersion'] = this.contentVersion;
+    if (this.panelizationSummary != null) {
+      data['panelizationSummary'] = this.panelizationSummary!.toJson();
+    }
+    if (this.imageLinks != null) {
+      data['imageLinks'] = this.imageLinks!.toJson();
+    }
+    data['language'] = this.language;
+    data['previewLink'] = this.previewLink;
+    data['infoLink'] = this.infoLink;
+    data['canonicalVolumeLink'] = this.canonicalVolumeLink;
+    data['subtitle'] = this.subtitle;
+    return data;
+  }
 }
 
-@JsonSerializable()
-class ImageLinks {
-  @JsonKey(name: "smallThumbnail")
-  final String? smallThumbnail;
-  @JsonKey(name: "thumbnail")
-  final String? thumbnail;
+class IndustryIdentifiers {
+  String? type;
+  String? identifier;
 
-  ImageLinks({
-    required this.smallThumbnail,
-    required this.thumbnail,
-  });
+  IndustryIdentifiers({this.type, this.identifier});
 
-  factory ImageLinks.fromJson(Map<String, dynamic> json) =>
-      _$ImageLinksFromJson(json);
+  IndustryIdentifiers.fromJson(Map<String, dynamic> json) {
+    type = json['type'];
+    identifier = json['identifier'];
+  }
 
-  Map<String, dynamic> toJson() => _$ImageLinksToJson(this);
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['type'] = this.type;
+    data['identifier'] = this.identifier;
+    return data;
+  }
 }
 
-@JsonSerializable()
-class IndustryIdentifier {
-  @JsonKey(name: "type")
-  final String? type;
-  @JsonKey(name: "identifier")
-  final String? identifier;
-
-  IndustryIdentifier({
-    required this.type,
-    required this.identifier,
-  });
-
-  factory IndustryIdentifier.fromJson(Map<String, dynamic> json) =>
-      _$IndustryIdentifierFromJson(json);
-
-  Map<String, dynamic> toJson() => _$IndustryIdentifierToJson(this);
-}
-
-@JsonSerializable()
-class PanelizationSummary {
-  @JsonKey(name: "containsEpubBubbles")
-  final bool? containsEpubBubbles;
-  @JsonKey(name: "containsImageBubbles")
-  final bool? containsImageBubbles;
-
-  PanelizationSummary({
-    required this.containsEpubBubbles,
-    required this.containsImageBubbles,
-  });
-
-  factory PanelizationSummary.fromJson(Map<String, dynamic> json) =>
-      _$PanelizationSummaryFromJson(json);
-
-  Map<String, dynamic> toJson() => _$PanelizationSummaryToJson(this);
-}
-
-@JsonSerializable()
 class ReadingModes {
-  @JsonKey(name: "text")
-  final bool? text;
-  @JsonKey(name: "image")
-  final bool? image;
+  bool? text;
+  bool? image;
 
-  ReadingModes({
-    required this.text,
-    required this.image,
-  });
+  ReadingModes({this.text, this.image});
 
-  factory ReadingModes.fromJson(Map<String, dynamic> json) =>
-      _$ReadingModesFromJson(json);
+  ReadingModes.fromJson(Map<String, dynamic> json) {
+    text = json['text'];
+    image = json['image'];
+  }
 
-  Map<String, dynamic> toJson() => _$ReadingModesToJson(this);
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['text'] = this.text;
+    data['image'] = this.image;
+    return data;
+  }
+}
+
+class PanelizationSummary {
+  bool? containsEpubBubbles;
+  bool? containsImageBubbles;
+
+  PanelizationSummary({this.containsEpubBubbles, this.containsImageBubbles});
+
+  PanelizationSummary.fromJson(Map<String, dynamic> json) {
+    containsEpubBubbles = json['containsEpubBubbles'];
+    containsImageBubbles = json['containsImageBubbles'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['containsEpubBubbles'] = this.containsEpubBubbles;
+    data['containsImageBubbles'] = this.containsImageBubbles;
+    return data;
+  }
+}
+
+class ImageLinks {
+  String? smallThumbnail;
+  String? thumbnail;
+
+  ImageLinks({this.smallThumbnail, this.thumbnail});
+
+  ImageLinks.fromJson(Map<String, dynamic> json) {
+    smallThumbnail = json['smallThumbnail'];
+    thumbnail = json['thumbnail'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['smallThumbnail'] = this.smallThumbnail;
+    data['thumbnail'] = this.thumbnail;
+    return data;
+  }
+}
+
+class SaleInfo {
+  String? country;
+  String? saleability;
+  bool? isEbook;
+
+  SaleInfo({this.country, this.saleability, this.isEbook});
+
+  SaleInfo.fromJson(Map<String, dynamic> json) {
+    country = json['country'];
+    saleability = json['saleability'];
+    isEbook = json['isEbook'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['country'] = this.country;
+    data['saleability'] = this.saleability;
+    data['isEbook'] = this.isEbook;
+    return data;
+  }
+}
+
+class AccessInfo {
+  String? country;
+  String? viewability;
+  bool? embeddable;
+  bool? publicDomain;
+  String? textToSpeechPermission;
+  Epub? epub;
+  Pdf? pdf;
+  String? webReaderLink;
+  String? accessViewStatus;
+  bool? quoteSharingAllowed;
+
+  AccessInfo(
+      {this.country,
+        this.viewability,
+        this.embeddable,
+        this.publicDomain,
+        this.textToSpeechPermission,
+        this.epub,
+        this.pdf,
+        this.webReaderLink,
+        this.accessViewStatus,
+        this.quoteSharingAllowed});
+
+  AccessInfo.fromJson(Map<String, dynamic> json) {
+    country = json['country'];
+    viewability = json['viewability'];
+    embeddable = json['embeddable'];
+    publicDomain = json['publicDomain'];
+    textToSpeechPermission = json['textToSpeechPermission'];
+    epub = json['epub'] != null ? new Epub.fromJson(json['epub']) : null;
+    pdf = json['pdf'] != null ? new Pdf.fromJson(json['pdf']) : null;
+    webReaderLink = json['webReaderLink'];
+    accessViewStatus = json['accessViewStatus'];
+    quoteSharingAllowed = json['quoteSharingAllowed'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['country'] = this.country;
+    data['viewability'] = this.viewability;
+    data['embeddable'] = this.embeddable;
+    data['publicDomain'] = this.publicDomain;
+    data['textToSpeechPermission'] = this.textToSpeechPermission;
+    if (this.epub != null) {
+      data['epub'] = this.epub!.toJson();
+    }
+    if (this.pdf != null) {
+      data['pdf'] = this.pdf!.toJson();
+    }
+    data['webReaderLink'] = this.webReaderLink;
+    data['accessViewStatus'] = this.accessViewStatus;
+    data['quoteSharingAllowed'] = this.quoteSharingAllowed;
+    return data;
+  }
+}
+
+class Epub {
+  bool? isAvailable;
+
+  Epub({this.isAvailable});
+
+  Epub.fromJson(Map<String, dynamic> json) {
+    isAvailable = json['isAvailable'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['isAvailable'] = this.isAvailable;
+    return data;
+  }
+}
+
+class Pdf {
+  bool? isAvailable;
+  String? acsTokenLink;
+
+  Pdf({this.isAvailable, this.acsTokenLink});
+
+  Pdf.fromJson(Map<String, dynamic> json) {
+    isAvailable = json['isAvailable'];
+    acsTokenLink = json['acsTokenLink'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['isAvailable'] = this.isAvailable;
+    data['acsTokenLink'] = this.acsTokenLink;
+    return data;
+  }
+}
+
+class SearchInfo {
+  String? textSnippet;
+
+  SearchInfo({this.textSnippet});
+
+  SearchInfo.fromJson(Map<String, dynamic> json) {
+    textSnippet = json['textSnippet'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['textSnippet'] = this.textSnippet;
+    return data;
+  }
 }

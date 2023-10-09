@@ -56,28 +56,25 @@ class HomePageScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               SizedBox(
-                                height: 30,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(top: 20),
-                                  child: ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    //itemCount:2,
-                                    itemCount:
-                                        BlocProvider.of<BookCubit>(context)
-                                                ?.bookModel
-                                                ?.items
-                                                ?.length ??
-                                            0,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      Image.network(
-                                          '${bookData?.items?[index].volumeInfo?.imageLinks?.smallThumbnail}');
-                                    },
-                                    // children: <Widget>[
-                                    //   // Image.asset(
-                                    //   //     '${bookData.items[in]}')
-                                    // ],
-                                  ),
+                                height: 200,
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  //itemCount:2,
+                                  itemCount:
+                                      BlocProvider.of<BookCubit>(context)
+                                              ?.bookModel
+                                              ?.items
+                                              ?.length ??
+                                          0,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                   return Image.network(
+                                        'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.shutterstock.com%2Fsearch%2Fnetwork&psig=AOvVaw1FgGfnXYQ5ZJj6C0e9M2n_&ust=1696972700714000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCOiJlff_6YEDFQAAAAAdAAAAABAE');
+                                  },
+                                  // children: <Widget>[
+                                  //   // Image.asset(
+                                  //   //     '${bookData.items[in]}')
+                                  // ],
                                 ),
                               ),
                               SizedBox(
