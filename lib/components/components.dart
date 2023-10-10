@@ -22,11 +22,15 @@ class ComponentIetm extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              '${bookModel?.items?[index].volumeInfo?.title}',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              maxLines: 3,
-              overflow: TextOverflow.ellipsis,
+
+            SizedBox(
+              width:200,
+              child: Text(
+                '${bookModel?.items?[index].volumeInfo?.title}',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                maxLines: 2,
+                overflow: TextOverflow.visible,
+              ),
             ),
             SizedBox(
               height: 15,

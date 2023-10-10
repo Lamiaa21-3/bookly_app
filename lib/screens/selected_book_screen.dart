@@ -47,7 +47,7 @@ class SelectedBookScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image.network(
-                '${bookModel?.items?[0].volumeInfo?.imageLinks?.smallThumbnail}',width: 100,height: 50,),
+                '${bookModel?.items?[0].volumeInfo?.imageLinks?.smallThumbnail}',),
             SizedBox(
               height: 35,
             ),
