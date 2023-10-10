@@ -20,10 +20,10 @@ class HomePageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // BlocProvider.of<BookCubit>(context).getBookData();
-    return BlocProvider(
-      create: (_) => BookCubit()..getBookData(),
-      child: BlocConsumer<BookCubit, BookState>(
+     //BlocProvider.of<BookCubit>(context).getBookData();
+    BookCubit.get(context).getBookData();
+    return
+     BlocConsumer<BookCubit, BookState>(
         listener: (context, state) {},
         builder: (context, state) {
           log("${BlocProvider.of<BookCubit>(context)?.bookModel?.items!.length}",
@@ -72,7 +72,7 @@ class HomePageScreen extends StatelessWidget {
                                        .get(context)
                                        .bookModel!
                                        .items![index].volumeInfo!.imageLinks!
-                                       .thumbnail}');
+                                       .smallThumbnail}');
                                   },
                                   // children: <Widget>[
                                   //   // Image.asset(
@@ -132,7 +132,7 @@ class HomePageScreen extends StatelessWidget {
                           ),
                         ));
         },
-      ),
+
     );
   }
 }

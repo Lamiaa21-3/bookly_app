@@ -44,7 +44,7 @@ class ComponentIetm extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  '${bookModel?.items?[index].volumeInfo?.averageRating}',
+                  '\$ ${bookModel?.items?[index].volumeInfo?.averageRating}',
                   style: TextStyle(fontSize: 25),
                 ),
                 SizedBox(
