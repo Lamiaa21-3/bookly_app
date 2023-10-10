@@ -16,7 +16,7 @@ import '../cubits/get_book_state.dart';
 class HomePageScreen extends StatelessWidget {
   HomePageScreen({Key? key}) : super(key: key);
 
-  BookModel? bookData;
+
 
   @override
   Widget build(BuildContext context) {
@@ -68,8 +68,11 @@ class HomePageScreen extends StatelessWidget {
                                           0,
                                   itemBuilder:
                                       (BuildContext context, int index) {
-                                   return Image.network(
-                                        'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.shutterstock.com%2Fsearch%2Fnetwork&psig=AOvVaw1FgGfnXYQ5ZJj6C0e9M2n_&ust=1696972700714000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCOiJlff_6YEDFQAAAAAdAAAAABAE');
+                                   return Image.network('${BookCubit
+                                       .get(context)
+                                       .bookModel!
+                                       .items![index].volumeInfo!.imageLinks!
+                                       .thumbnail}');
                                   },
                                   // children: <Widget>[
                                   //   // Image.asset(
@@ -105,9 +108,8 @@ class HomePageScreen extends StatelessWidget {
                                       MaterialPageRoute(
                                         builder: (context) =>
                                             SelectedBookScreen(
-                                          bookModel: BlocProvider.of<BookCubit>(
-                                                  context)
-                                              .bookModel,
+                                          bookModel:BookCubit.get(context).bookModel
+                                              ,
                                           index: index,
                                         ),
                                       ),

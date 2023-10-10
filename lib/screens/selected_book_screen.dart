@@ -12,9 +12,11 @@ class SelectedBookScreen extends StatelessWidget {
   final BookModel? bookModel;
 
   final int index;
+  //كده الموديل مش واخد قيم بردو
 
   @override
   Widget build(BuildContext context) {
+    print('mmmmmmmmmmm');
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -45,7 +47,7 @@ class SelectedBookScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image.network(
-                '${bookModel?.items?[index].volumeInfo?.imageLinks?.smallThumbnail}',width: 100,height: 50,),
+                '${bookModel?.items?[0].volumeInfo?.imageLinks?.smallThumbnail}',width: 100,height: 50,),
             SizedBox(
               height: 35,
             ),
