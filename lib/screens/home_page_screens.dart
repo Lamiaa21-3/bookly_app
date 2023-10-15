@@ -109,6 +109,7 @@ class HomePageScreen extends StatelessWidget {
                                         builder: (context) =>
                                             SelectedBookScreen(
                                           bookModel:BookCubit.get(context).bookModel
+
                                               ,
                                           index: index,
                                         ),
